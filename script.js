@@ -8,7 +8,7 @@ function limitadorCaractere(textareaId, contadorId, limitadorId) {
   const limiteCaracteres = document.getElementById(limitadorId).value;
   const contador = document.getElementById(contadorId);
   const textarea = document.getElementById(textareaId);
-  textarea.maxLenght = limiteCaracteres;
+  textarea.maxLength = limiteCaracteres;
 
   const caracteresDigitados = textarea.value.length;
   const caracteresRestantes = limiteCaracteres - caracteresDigitados;
