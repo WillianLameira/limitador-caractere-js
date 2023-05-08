@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Limitador de Caracteres</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body{
+        background-color: rgb(70, 70, 70);
+      }
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .group-textarea {
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+      }
+      h1,span, label{
+        color: #fff;
+        font-size: 1.3rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 10px 0 10px 0;
+      }
+      label{
+        font-size: 1.1rem;
+      }
+      #limitador{
+
+      }
+      textarea {
+        width: 231px;
+        height: 98px;
+      }
+      #counter {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+      <h1>Limitador de Caracteres</h1>
+      <label for="limitador">Limitador</label>
+      <input type="number" name="limitador" id="limitador" onkeyup="mudaLimitador(this.id, counter.id)" autofocus>
+      <div class="group-textarea">
+        <textarea
+          name="campoTextArea"
+          id="campoTextArea"
+          cols="30"
+          rows="10"
+          onkeyup="contagemRegressiva(this.id, counter.id, limitador.id);"
+        ></textarea>
+        <span id="counter">Caracteres Restantes: </span>
+      </div>
+    </div>
+    </main>
+
+    <script>
+
+
+      function mudaLimitador(limitadorId,contadorId){
+        const limitador = document.getElementById(limitadorId);
+        const contador = document.getElementById(contadorId);
+        counter.value= contador.textContent = "Caracteres Restantes: " + limitador.value + ".";
+        
+      }
+      function contagemRegressiva(textareaId, contadorId, limitadorId) {
+        const limiteCaracteres = document.getElementById(limitadorId).value;
+        const contador = document.getElementById(contadorId);
+        const textarea = document.getElementById(textareaId);
+        textarea.maxLenght = limiteCaracteres;
+
+        const caracteresDigitados = textarea.value.length;
+        const caracteresRestantes = limiteCaracteres - caracteresDigitados;
+
+        if (caracteresRestantes > 0) {
+          contador.textContent =
+            "Caracteres Restantes: " + caracteresRestantes + ".";
+        } else if (caracteresRestantes == 0) {
+          contador.textContent =
+            "Caracteres Restantes: " + caracteresRestantes + ".";
+          contador.style.color = "red";
+        }
+
+        if (caracteresDigitados >= limiteCaracteres) {
+          textarea.value = textarea.value.substr(0, limiteCaracteres);
+        }
+      }
+    </script>
+  </body>
+</html>
